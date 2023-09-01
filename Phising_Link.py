@@ -24,7 +24,7 @@ def is_phishing_link(url_list):
     ]
 
     for i in services:
-        if url_list[0]=='https:' and url_list[1]==i:
+        if url_list[0]=='https:' and (url_list[1][0] == i or url_list[1][1] == i):
             return True
         else:
             continue
@@ -51,7 +51,7 @@ if __name__=='__main__':
             link=link_check(url)
             url_list=[]
             url_list.append(link.split('//')[0])
-            url_list.append(link.split('//')[1].split('.')[1])
+            url_list.append(link.split('//')[1].split('.'))
             if is_phishing_link(url_list):
                 print(green,"------> The link appears to be safe.",reset)
                 print("Main Url is: ", green,link,reset)
